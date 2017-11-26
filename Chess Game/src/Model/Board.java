@@ -24,25 +24,25 @@ public class Board {
         size = 8;
         chessGrid = new GridSquare[size][size];
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; i < size; j++) {
-                Position pos = new Position(i, j);
-                chessGrid[i][j] = new GridSquare(pos);
-                GridSquare current = chessGrid[i][j];
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                Position pos = new Position(x, y);
+                chessGrid[x][y] = new GridSquare(pos);
+                GridSquare current = chessGrid[x][y];
                 boolean isBlack = true;
 
                 /**
                  * Checks to see if the current row is 0 or 1. If it is, then
                  * the piece belongs to the white player
                  */
-                if (i == 0 || i == 1) {
+                if (y == 0 || y == 1) {
                     isBlack = false;
                 }
 
-                if (i == 1 || i == 6) {
+                if (y == 1 || y == 6) {
                     current.addPiece(new Pawn(pos, isBlack));
-                } else if (i == 0 || i == 7) {
-                    switch (j) {
+                } else if (y == 0 || y == 7) {
+                    switch (x) {
                         case 0:
                         case 7:
                             current.addPiece(new Rook(pos, isBlack));
@@ -67,5 +67,16 @@ public class Board {
                 }
             }
         }
+    }
+
+    /**
+     * Retrieves the grid square for the board at the position (x,y)
+     *
+     * @param x the x component of the position
+     * @param y the y component of the position
+     * @return the grid square at the specified location
+     */
+    public GridSquare getGridSquare(int x, int y) {
+        return this.chessGrid[x][y];
     }
 }

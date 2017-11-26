@@ -11,8 +11,8 @@ package Model;
  */
 public class Position {
 
-    private int x = 0;
-    private int y = 0;
+    private int x;
+    private int y;
 
     /**
      * Constructor that takes an X and Y value as parameters and constructs a

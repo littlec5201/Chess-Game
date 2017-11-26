@@ -5,6 +5,7 @@
  */
 package Model;
 
+import View.MainGUI;
 import java.util.ArrayList;
 
 /**
@@ -14,10 +15,9 @@ import java.util.ArrayList;
 public class ChessPiece {
 
     private final String pieceName;
-    private boolean isBlack;
-    private Position currentPosition;
-    private ArrayList<Position> possibleMoves;
-    private boolean onBoard;
+    private final boolean isBlack;
+    protected Position currentPosition;
+    protected ArrayList<Position> possibleMoves;
 
     /**
      * Constructor for the chess piece class that takes the name of the piece
@@ -32,7 +32,29 @@ public class ChessPiece {
         this.pieceName = pieceName;
         this.currentPosition = startPosition;
         this.isBlack = isBlack;
-        onBoard = true;
+    }
+
+    /**
+     * Method checking to see if the position at (x,y) is on the board and if
+     * the piece is able to legally move here. Future update: Check if moving
+     * the piece will put the player in check.
+     *
+     * @param x the x component of the position
+     * @param y the y component of the position
+     * @return whether or not the loop can proceed
+     */
+    protected boolean add(int x, int y) {
+        Position pos = new Position(x, y);
+        if (isOnBoard(x, y)) {
+            if (MainGUI.board.getGridSquare(y, x) == null) {
+                possibleMoves.add(pos);
+                return true;
+            } else if (MainGUI.board.getGridSquare(y, x).getCurrentPiece().isBlack() != this.isBlack()) {
+                possibleMoves.add(pos);
+                return false;
+            }
+        }
+        return false;
     }
 
     /**
@@ -51,16 +73,7 @@ public class ChessPiece {
      * @return the ArrayList of possible moves that the current piece can make
      */
     public ArrayList<Position> possibleMoves() {
-        return null;
-    }
-
-    /**
-     * Determines whether the current piece is black or not
-     *
-     * @param isBlack whether the piece is black
-     */
-    public void setBlack(boolean isBlack) {
-        this.isBlack = isBlack;
+        return possibleMoves;
     }
 
     /**
@@ -70,5 +83,26 @@ public class ChessPiece {
      */
     public boolean isBlack() {
         return this.isBlack;
+    }
+
+    /**
+     * Retrieves the pieceName of the current piece
+     *
+     * @return pieceName
+     */
+    public String getPieceName() {
+        return this.pieceName;
+    }
+
+    /**
+     * This method checks to see if the x and y values provided are a valid
+     * position on the board
+     *
+     * @param x
+     * @param y
+     * @return whether the x and y values are a valid position
+     */
+    protected boolean isOnBoard(int x, int y) {
+        return (x < 8 && x >= 0 && y < 8 && y >= 0);
     }
 }

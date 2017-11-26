@@ -8,6 +8,8 @@ package View;
 import Model.ChessPiece;
 import Model.Position;
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,9 +18,12 @@ import java.awt.Color;
 public class GridSquare extends javax.swing.JPanel {
 
     private ChessPiece currentPiece = null;
+    private JButton button;
+    private JLabel label;
 
     /**
      * Creates new form GridSquare
+     * @param position the position of the grid square on the board
      */
     public GridSquare(Position position) {
         initComponents();
@@ -51,6 +56,12 @@ public class GridSquare extends javax.swing.JPanel {
     public void addPiece(ChessPiece piece) {
         if (this.currentPiece == null) {
             currentPiece = piece;
+            button = new JButton(currentPiece.getPieceName());
+            button.setBackground(Color.red);
+            button.setSize(50, 50);
+            this.add(button);
+            this.revalidate();
+            this.repaint();
         } else {
 
         }
@@ -64,9 +75,17 @@ public class GridSquare extends javax.swing.JPanel {
     public void removePiece(ChessPiece piece) {
 
     }
-    
+
     public void refresh() {
-        
+
+    }
+    
+    public ChessPiece getCurrentPiece() {
+        return currentPiece;
+    }
+
+    public void setCurrentPiece(ChessPiece currentPiece) {
+        this.currentPiece = currentPiece;
     }
 
     /**
