@@ -24,25 +24,25 @@ public class Board {
         size = 8;
         chessGrid = new GridSquare[size][size];
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; i < size; j++) {
-                Position pos = new Position(i, j);
-                chessGrid[i][j] = new GridSquare(pos);
-                GridSquare current = chessGrid[i][j];
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; y < size; x++) {
+                Position pos = new Position(y, x);
+                chessGrid[y][x] = new GridSquare(pos);
+                GridSquare current = chessGrid[y][x];
                 boolean isBlack = true;
 
                 /**
                  * Checks to see if the current row is 0 or 1. If it is, then
                  * the piece belongs to the white player
                  */
-                if (i == 0 || i == 1) {
+                if (y == 0 || y == 1) {
                     isBlack = false;
                 }
 
-                if (i == 1 || i == 6) {
+                if (y == 1 || y == 6) {
                     current.addPiece(new Pawn(pos, isBlack));
-                } else if (i == 0 || i == 7) {
-                    switch (j) {
+                } else if (y == 0 || y == 7) {
+                    switch (x) {
                         case 0:
                         case 7:
                             current.addPiece(new Rook(pos, isBlack));
