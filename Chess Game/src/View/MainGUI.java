@@ -6,6 +6,7 @@
 package View;
 
 import Model.Position;
+import Model.Board;
 import java.awt.GridLayout;
 
 /**
@@ -14,18 +15,20 @@ import java.awt.GridLayout;
  */
 public class MainGUI extends javax.swing.JFrame {
 
+    public static Board board;
+    
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         initComponents();
+        board = new Board();
         GridLayout gl = new GridLayout(8, 8);
         this.setLayout(gl);
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                Position pos = new Position(x,y);
-                GridSquare gs = new GridSquare(pos);
-                this.add(gs);
+                GridSquare curr = board.getGridSquare(x, y);
+                this.add(curr);
             }
         }
     }

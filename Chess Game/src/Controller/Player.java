@@ -5,7 +5,13 @@
  */
 package Controller;
 
+import Model.Bishop;
 import Model.ChessPiece;
+import Model.King;
+import Model.Knight;
+import Model.Pawn;
+import Model.Queen;
+import Model.Rook;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +19,13 @@ import java.util.ArrayList;
  * @author Callum
  */
 public class Player {
-    
-    private ArrayList<ChessPiece> grave;
-    
+
+    protected ArrayList<ChessPiece> grave;
+    protected ArrayList<Pawn> pawns;
+    protected ArrayList<Rook> rooks;
+    protected ArrayList<Knight> knights;
+    protected ArrayList<Bishop> bishops;
+    protected King king;
+    protected Queen queen;
+
 }
